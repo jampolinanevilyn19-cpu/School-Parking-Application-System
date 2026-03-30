@@ -369,8 +369,7 @@ class ParkingController extends Controller
             $parkingSpots[$availableSpotKey]['assigned_to'] = $applications[$index]['id'];
             Session::put('parking_spots', $parkingSpots);
         }
-        
-        // Create transaction
+
         $newTransaction = [
             'id' => $this->getNextId('transactions'),
             'application_id' => $applications[$index]['id'],
@@ -407,7 +406,7 @@ class ParkingController extends Controller
         $index = array_search($id, array_column($applications, 'id'));
         
         if ($index !== false) {
-            // Free up parking spot if assigned
+
             if ($applications[$index]['parking_slot']) {
                 foreach ($parkingSpots as $key => $spot) {
                     if ($spot['assigned_to'] == $applications[$index]['id']) {
@@ -496,7 +495,7 @@ class ParkingController extends Controller
             }
         }
         
-        // Monthly data aggregation
+
         $monthlyData = [];
         foreach ($completedTransactions as $transaction) {
             $month = date('Y-m', strtotime($transaction['date']));
